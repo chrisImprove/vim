@@ -4,6 +4,17 @@
 *	Date		:	20160805								*
 *************************************************************
 Default {
+    Common {
+	    %	跳转到配对的括号去
+	    [[	跳转到代码块的开头去(但要求代码块中'{'必须单独占一行)
+	    gD	跳转到局部变量的定义处
+	    ''	跳转到光标上次停靠的地方, 是两个', 而不是一个"
+	    mx	设置书签,x只能是a-z的26个字母
+	    `x	跳转到书签处("`"是1左边的键)
+	    >	增加缩进,"x>"表示增加以下x行的缩进
+	    <	减少缩进,"x<"表示减少以下x行的缩进
+    }
+    
     vim buffer:
         :ls         查看
         1 #  "shell1.sh"
@@ -47,12 +58,17 @@ Deps {
 		
 	Tagbar	: 实现函数的跳转
 		生成tags：
-			c: ctags –R src
-			c++： ctags -R --c++-kinds=+p --fields=+iaS --extra=+q src
-			--c++-kinds=+p : 为C++文件增加函数原型的标签
-			--fields=+iaS : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
-			--extra=+q : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
-			-R : 递归生成src中所有源文件的tags文件
+			c   : ctags –R src
+			c++ : ctags -R --c++-kinds=+p --fields=+iaS --extra=+q src
+			    --c++-kinds=+p : 为C++文件增加函数原型的标签
+			    --fields=+iaS : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
+			    --extra=+q : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
+			    -R : 递归生成src中所有源文件的tags文件
+			PHP : ctags -R --fields=+aimS --languages=php
+                -a : Access (or export) of class members; Adds the access field like: access: public
+                -i : Inheritance information; Adds the inherits field like: inherits:RuntimeException,ExceptionInterface
+                -m : Implementation information; Adds the implementation field like: implementation:abstract
+                -S : Signature of routine; Adds the signature field like: signature:($a, $b)
 		命令:
 			CTRL+]	：	就会跳转到对应的定义
 			CTRL+o 	：	可以回退到原来的地方
@@ -253,17 +269,6 @@ General Programming{
 HTML {
 	amirh/HTML-AutoCloseTag：
 	自动关闭Html 标签  输入> 
-}
-
-Common {
-	%	跳转到配对的括号去
-	[[	跳转到代码块的开头去(但要求代码块中'{'必须单独占一行)
-	gD	跳转到局部变量的定义处
-	''	跳转到光标上次停靠的地方, 是两个', 而不是一个"
-	mx	设置书签,x只能是a-z的26个字母
-	`x	跳转到书签处("`"是1左边的键)
-	>	增加缩进,"x>"表示增加以下x行的缩进
-	<	减少缩进,"x<"表示减少以下x行的缩进
 }
 
 YouCompleteMe {

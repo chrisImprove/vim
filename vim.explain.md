@@ -14,10 +14,11 @@ Deps {
         sudo apt-get install silversearcher-ag
 
     tagbar.vim
+        " C语言家族的自动跳转YouCompleteMe已经支持了[Used For PHP]
         sudo apt-get install ctags
         Config:
             nnoremap <silent> <leader>tt :TagbarToggle<CR>
-            nnoremap<silent><F4>:TagbarToggle<CR>
+            nnoremap <silent> <F4>:TagbarToggle<CR>
             let g:tagbar_left = 1
     cscope:
         sudo apt-get install cscope
@@ -202,7 +203,7 @@ Deps {
                 1. Install development tools and CMake: 'sudo apt-get install build-essential cmake'
                 2. Make sure you have Python headers installed: 'sudo apt-get install python-dev python3-dev'.
                 3. 为了支持JavaScript环境install [Node.js and npm]
-                    sudo apt-get install node*      (node -v   The version should be higher than v0.10.32.)
+                    sudo apt-get install nodejs*      (node -v   The version should be higher than v0.10.32.)
                     sudo apt-get install npm        (npm -v    The version should be higher than 2.1.8.)
                 4. Compiling && Install YCM
                     cd ~/.vim/bundle/YouCompleteMe

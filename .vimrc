@@ -330,6 +330,11 @@
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
+    " [CHRIS][170310][ADD][START]
+    " Yank To System Clipboard, And Paste From Clipboard Dependent on vim-gnome
+    map <C-c> "+y
+    map <Leader>p "+gp
+    " [CHRIS][170310][ADD][END]
 
     " Code folding options [设置Code折叠等级]
     nmap <leader>f0 :set foldlevel=0<CR>
