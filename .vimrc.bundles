@@ -1,0 +1,318 @@
+" Modeline and Notes {
+" THIS FILE IS DESCRIPTON ABOUT THE VIM PLUGINS
+" Author    : CHRIS
+" Date      : 20160606
+" }
+
+" Environment {
+
+    " Basics {
+        set nocompatible        " Must be first line
+        set background=dark     " Assume a dark background
+    " }
+
+    " Windows Compatible {
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+        " across (heterogeneous) systems easier.
+        if has('win32') || has('win64')
+          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+
+          " Be nice and check for multi_byte even if the config requires
+          " multi_byte support most of the time
+          if has("multi_byte")
+            " Windows cmd.exe still uses cp850. If Windows ever moved to
+            " Powershell as the primary terminal, this would be utf-8
+            set termencoding=cp850
+            " Let Vim use utf-8 internally, because many scripts require this
+            set encoding=utf-8
+            setglobal fileencoding=utf-8
+            " Windows has traditionally used cp1252, so it's probably wise to
+            " fallback into cp1252 instead of eg. iso-8859-15.
+            " Newer Windows files might contain utf-8 or utf-16 LE so we might
+            " want to try them first.
+            set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+          endif
+        endif
+    " }
+
+    " Setup Bundle Support {
+        " The next three lines ensure that the ~/.vim/bundle/ system works
+        filetype off
+        set rtp+=~/.vim/bundle/vundle
+        call vundle#rc()
+    " }
+
+    " Add an UnBundle command {
+    function! UnBundle(arg, ...)
+      let bundle = vundle#config#init_bundle(a:arg, a:000)
+      call filter(g:vundle#bundles, 'v:val["name_spec"] != "' . a:arg . '"')
+    endfunction
+
+    com! -nargs=+         UnBundle
+    \ call UnBundle(<args>)
+    " }
+
+" }
+
+" Bundles {
+
+    " Deps {
+        Bundle 'gmarik/vundle'
+        " COMMAND {
+            if executable('ctags')
+                Bundle 'majutsushi/tagbar'
+            endif
+
+            if executable('ag')
+                Bundle 'mileszs/ack.vim'
+                let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+            elseif executable('ack-grep')
+                let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+                Bundle 'mileszs/ack.vim'
+            elseif executable('ack')
+                Bundle 'mileszs/ack.vim'
+            endif
+        " }
+    " }
+
+    " list only the plugin groups you will use
+    " 'writing', 'python', 'javascript', 'C', 'youcompleteme', 'neocomplcache' ,'programming', 'neocomplete', 'php', 'html'
+    " youcompleteme->Pythone neocomplete->Lua neocomplcache->no need any sport
+    if !exists('g:bundle_groups')
+        let g:bundle_groups=['UI', 'general', 'programming', 'youcompleteme', 'php', 'html', 'javascript']
+    endif
+
+    if !exists("g:override_bundles")
+
+    " UI {
+        if count(g:bundle_groups, 'UI')
+            " Color
+            Bundle 'altercation/vim-colors-solarized'
+            "Bundle 'spf13/vim-colors'
+            "Bundle 'flazz/vim-colorschemes'
+            " Vim状态栏设置
+            " Bundle 'powerline/fonts'
+            if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
+                Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+            elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
+                Bundle 'Lokaltog/vim-powerline'
+            else
+                " 小巧美观的状态栏
+                Bundle 'vim-airline/vim-airline'
+                Bundle 'vim-airline/vim-airline-themes'
+                " 提示输出的 有图片在自己路径下
+                Bundle 'bling/vim-bufferline'
+           endif
+        endif
+    " }
+
+    " General {
+        if count(g:bundle_groups, 'general')
+            " 树状目录
+            Bundle 'scrooloose/nerdtree'
+            Bundle 'jistr/vim-nerdtree-tabs'
+            Bundle 'Xuyuanp/nerdtree-git-plugin'
+            " 缩进显示
+            Bundle 'nathanaelkane/vim-indent-guides'
+            " 选择代码块中的所有内容
+            Bundle 'gcmt/wildfire.vim'
+            " 可以自定义匹配搜索 BEGIN->END
+            Bundle 'matchit.zip'
+            " 可以用来保存文件上次退出的状态
+            Bundle 'vim-scripts/sessionman.vim'
+            " 提供了一组对应默认移动的键绑定 搜索高亮
+            Bundle 'easymotion/vim-easymotion'
+            " 多光标Vim 
+            Bundle 'terryma/vim-multiple-cursors'
+            " 括号自动补齐
+            Bundle 'jiangmiao/auto-pairs'
+            " 彩虹括号增强版 不同层次的括号不同颜色
+            Bundle 'luochen1990/rainbow'
+            " 保持文件的修改状态 退出后还可以撤销到以前
+            " Bundle 'mbbill/undotree'
+        endif
+    " }
+
+    " General Programming {
+        if count(g:bundle_groups, 'programming')
+            " 快速的为字符串包围/改变或去除引号/括号或者HTML标签
+            Bundle 'tpope/vim-surround'
+            Bundle 'tpope/vim-repeat'
+            " 格式化工具
+            Bundle 'godlygeek/tabular'
+            " 注释操作
+            " Bundle 'scrooloose/nerdcommenter'
+            " Bundle 'tpope/vim-commentary'
+            " 文件模糊搜索
+            Bundle 'ctrlpvim/ctrlp.vim'
+            " 自动跳转函数 查找函数
+            Bundle 'tacahiroy/ctrlp-funky'
+            " Git 集成 
+            " 在左边行显示与Git仓库不同
+            Bundle 'mhinz/vim-signify'
+            Bundle 'tpope/vim-fugitive'
+            " 解决冲突Git
+            "Bundle 'rhysd/conflict-marker.vim'
+            " 可以在GitHub上记录代码片段  有空需要学习
+            " Bundle 'mattn/gist-vim'
+            " 静态语法检查
+            " Pick one of the checksyntax, jslint, or syntastic
+            Bundle 'scrooloose/syntastic'
+
+        endif
+"    " }
+
+    " Snippets & AutoComplete {
+        if count(g:bundle_groups, 'snipmate')
+"            " addon-mv-ttils和tlib-viw为snipmate依赖组件
+"            Bundle 'MarcWeber/vim-addon-mw-utils'
+"            Bundle 'tomtom/tlib_vim'
+"            Bundle 'garbas/vim-snipmate'
+"            " 定制自己的代码片段 as:mainn
+"            " 需要多看看 .vim/bundle/vim-snippets/snippets
+"            Bundle 'honza/vim-snippets'
+"            " Source support_function.vim to support vim-snippets.
+"            if filereadable(expand("~/.vim/bundle/vim-snippets/snippets/support_functions.vim"))
+"                source ~/.vim/bundle/vim-snippets/snippets/support_functions.vim
+"            endif
+        elseif count(g:bundle_groups, 'youcompleteme')
+            Bundle 'Valloric/YouCompleteMe'
+            Bundle 'SirVer/ultisnips'
+            Bundle 'honza/vim-snippets'
+"        elseif count(g:bundle_groups, 'neocomplcache')
+"            Bundle 'Shougo/neocomplcache'
+"            Bundle 'Shougo/neosnippet'
+"            Bundle 'Shougo/neosnippet-snippets'
+"            Bundle 'honza/vim-snippets'
+        elseif count(g:bundle_groups, 'neocomplete')
+            Bundle 'Shougo/neocomplete.vim.git'
+            Bundle 'Shougo/neosnippet'
+            Bundle 'Shougo/neosnippet-snippets'
+            Bundle 'honza/vim-snippets'
+        endif
+    " }
+
+    " PHP {
+        if count(g:bundle_groups, 'php')
+            " 集成PHP特性 TODO 有空再配置PIV
+            Bundle 'spf13/PIV'
+            " PHP 命名
+            Bundle 'arnaud-lb/vim-php-namespace'
+            " Twig是PHP的一个灵活、高效并且安全的PHP模板引擎
+            Bundle 'beyondwords/vim-twig'
+        endif
+    " }
+
+    " HTML {
+        if count(g:bundle_groups, 'html')
+            " 自动关闭Html 标签  输入> 现在不能自动下载  以后需要再打开
+            "Bundle 'amirh/HTML-AutoCloseTag'
+            Bundle 'hail2u/vim-css3-syntax'
+            " 用具体代表的颜色做[rbg() red...]的背景
+            Bundle 'gorodinskiy/vim-coloresque'
+            " Haml是一种用来描述任何XHTML web document的标记语(see explain.md)
+            " Bundle 'tpope/vim-haml'
+            " An Interface to WEB APIs.
+            " Bundle 'mattn/webapi-vim'
+            " 方便写多层结构(见.vimrc.explain)
+            Bundle 'mattn/emmet-vim'
+        endif
+    " }
+
+    " Javascript {
+        if count(g:bundle_groups, 'javascript')
+            Bundle 'pangloss/vim-javascript'
+            Bundle 'briancollins/vim-jst'
+            " Json 相关的配置(插件，语法等等)
+            Bundle 'elzr/vim-json'
+            " Less 是一个 CSS 预处理器，让 CSS 具有动态性
+            " Bundle 'groenewege/vim-less'
+            " CoffeeScript是一套JavaScript的转译语言
+            " Bundle 'kchmck/vim-coffee-script'
+        endif
+    " }
+
+    " C {
+        if count(g:bundle_groups, 'C')
+            " C C++ 头文件 C文件一键切换
+            Bundle 'a.vim'
+        endif
+    " }
+
+    " Python {
+        if count(g:bundle_groups, 'python')
+            " Pick either python-mode or pyflakes & pydoc
+            Bundle 'klen/python-mode'
+            Bundle 'yssource/python.vim'
+            Bundle 'python_match.vim'
+            Bundle 'pythoncomplete'
+        endif
+    " }
+
+    " Writing {
+        if count(g:bundle_groups, 'writing')
+            Bundle 'reedes/vim-litecorrect'
+            Bundle 'reedes/vim-textobj-sentence'
+            Bundle 'reedes/vim-textobj-quote'
+            Bundle 'reedes/vim-wordy'
+        endif
+    " }
+
+    " Scala {
+        if count(g:bundle_groups, 'scala')
+            Bundle 'derekwyatt/vim-scala'
+            Bundle 'derekwyatt/vim-sbt'
+            Bundle 'xptemplate'
+        endif
+    " }
+
+    " Haskell {
+        if count(g:bundle_groups, 'haskell')
+            Bundle 'travitch/hasksyn'
+            Bundle 'dag/vim2hs'
+            Bundle 'Twinside/vim-haskellConceal'
+            Bundle 'Twinside/vim-haskellFold'
+            Bundle 'lukerandall/haskellmode-vim'
+            Bundle 'eagletmt/neco-ghc'
+            Bundle 'eagletmt/ghcmod-vim'
+            Bundle 'Shougo/vimproc.vim'
+            Bundle 'adinapoli/cumino'
+            Bundle 'bitc/vim-hdevtools'
+        endif
+    " }
+
+    " Puppet {
+        if count(g:bundle_groups, 'puppet')
+            Bundle 'rodjek/vim-puppet'
+        endif
+    " }
+
+    " Go Lang {
+        if count(g:bundle_groups, 'go')
+            "Bundle 'Blackrush/vim-gocode'
+            Bundle 'fatih/vim-go'
+        endif
+    " }
+
+    " Elixir {
+        if count(g:bundle_groups, 'elixir')
+            Bundle 'elixir-lang/vim-elixir'
+            Bundle 'carlosgaldino/elixir-snippets'
+            Bundle 'mattreduce/vim-mix'
+        endif
+    " }
+
+    " Misc {
+        if count(g:bundle_groups, 'misc')
+            Bundle 'rust-lang/rust.vim'
+            Bundle 'tpope/vim-markdown'
+            Bundle 'spf13/vim-preview'
+            Bundle 'tpope/vim-cucumber'
+            Bundle 'cespare/vim-toml'
+            Bundle 'quentindecock/vim-cucumber-align-pipes'
+            Bundle 'saltstack/salt-vim'
+        endif
+    " }
+
+    endif
+" }
