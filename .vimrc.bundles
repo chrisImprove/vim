@@ -90,7 +90,7 @@
             Bundle 'altercation/vim-colors-solarized'
             "Bundle 'spf13/vim-colors'
             "Bundle 'flazz/vim-colorschemes'
-            " Vim状态栏设置
+            " vim powerline/airline font plugin
             " Bundle 'powerline/fonts'
             if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
                 Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
@@ -101,7 +101,7 @@
                 Bundle 'vim-airline/vim-airline'
                 Bundle 'vim-airline/vim-airline-themes'
                 " 提示输出的 有图片在自己路径下
-                Bundle 'bling/vim-bufferline'
+                " Bundle 'bling/vim-bufferline'
            endif
         endif
     " }
@@ -200,6 +200,8 @@
             Bundle 'arnaud-lb/vim-php-namespace'
             " Twig是PHP的一个灵活、高效并且安全的PHP模板引擎
             Bundle 'beyondwords/vim-twig'
+            " YII2 apidoc API帮助文档
+            Bundle 'mikehaertl/yii2-apidoc-vim'
         endif
     " }
 

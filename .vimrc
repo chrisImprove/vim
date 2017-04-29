@@ -51,6 +51,16 @@
 
 " General {
     set background=dark         " Assume a dark background
+    " Allow to trigger background
+    function! ToggleBG()
+        let s:tbg = &background
+        " Inversion
+        if s:tbg == "dark"
+            set background=light
+        else
+            set background=dark
+        endif
+    endfunction
 
     if !has('gui')
         set term=$TERM          " Make arrow and other keys work
@@ -75,6 +85,7 @@
     set iskeyword-=.                    " '.' is an end of word designator
     set iskeyword-=#                    " '#' is an end of word designator
     set iskeyword-=-                    " '-' is an end of word designator
+    " set iskeyword+=_,$,@,%,#,-
 
     if has('clipboard')
         if has('unnamedplus')  " When possible use + register for copy-paste
@@ -92,28 +103,6 @@
         autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
         " Always switch to the current file directory
     endif
-
-    " Instead of reverting the cursor to the last position in the buffer, we
-    " set it to the first line when editing a git commit message
-"    au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
-    " http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-    " Restore cursor to file position in previous editing session
-    " To disable this, add the following to your .vimrc.before.local file:
-    "   let g:spf13_no_restore_cursor = 1
-"    if !exists('g:spf13_no_restore_cursor')
-"        function! ResCur()
-"            if line("'\"") <= line("$")
-"                silent! normal! g`"
-"                return 1
-"            endif
-"        endfunction
-
-"        augroup resCur
-"            autocmd!
-"            autocmd BufWinEnter * call ResCur()
-"        augroup END
-"    endif
 
 "    " Setting up the directories {
 "        set backup                  " Backups are nice ...
@@ -140,6 +129,7 @@
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
+    set cursorcolumn                " Highlight current colorcolumn
     set cursorline                  " Highlight current line
 
     highlight clear SignColumn      " SignColumn should match background
@@ -157,12 +147,12 @@
     set ignorecase                  " Case insensitive search
     set smartcase                   " Case sensitive when uc present
 "    set wildmenu                    " Show list instead of just completing
-"    set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+    set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
-    set foldenable                  " Auto fold code
-    set list
+    "set foldenable                  " Auto fold code
+    set list                        " Show tab and space
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
     if has('cmdline_info')
@@ -178,10 +168,6 @@
         " Broken down into easily includeable segments
         set statusline=%<%f\                     " Filename
         set statusline+=%w%h%m%r                 " Options
-        if !exists('g:override_bundles')
-" Chris 170228 When Install fugitive Open
-            "set statusline+=%{fugitive#statusline()} " Git Hotness
-        endif
         set statusline+=\ [%{&ff}/%Y]            " Filetype
         set statusline+=\ [%{getcwd()}]          " Current dir
         set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
@@ -191,7 +177,7 @@
 
 " Formatting {
 
-    set nowrap                      " Do not wrap long lines
+    set wrap                        " [nowrap] is Do not wrap long lines
     set autoindent                  " Indent at the same level of the previous line
     set shiftwidth=4                " Use indents of 4 spaces
     set expandtab                   " Tabs are spaces, not tabs
@@ -203,11 +189,7 @@
     "set matchpairs+=<:>             " Match, to be used with %
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-    " Remove trailing whitespaces and ^M chars
-    " To disable the stripping of whitespace, add the following to your
-    " .vimrc.before.local file:
-    "   let g:spf13_keep_trailing_whitespace = 1
-    "autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
+
     "autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
@@ -225,31 +207,8 @@
 
 " Key (re)Mappings {
 
-    " The default leader is '\', but many people prefer ',' as it's in a standard
-    " location. To override this behavior and set it back to '\' (or any other
-    " character) 设置lead 的快捷键[',]:
-    "   let g:spf13_leader='\'
-    if !exists('g:spf13_leader')
-        let mapleader = ','
-    else
-        let mapleader=g:spf13_leader
-    endif
-
-    " The default mappings for editing and applying the spf13 configuration
-    " are <leader>ev and <leader>sv respectively. Change them to your preference
-    " by adding the following to your .vimrc.before.local file:
-    "   let g:spf13_edit_config_mapping='<leader>ec'
-    "   let g:spf13_apply_config_mapping='<leader>sc'
-    if !exists('g:spf13_edit_config_mapping')
-        let s:spf13_edit_config_mapping = '<leader>ev'
-    else
-        let s:spf13_edit_config_mapping = g:spf13_edit_config_mapping
-    endif
-    if !exists('g:spf13_apply_config_mapping')
-        let s:spf13_apply_config_mapping = '<leader>sv'
-    else
-        let s:spf13_apply_config_mapping = g:spf13_apply_config_mapping
-    endif
+    " Set default leader key is ','
+    let mapleader = ','
 
     " Easier moving in tabs and windows
     "   let g:spf13_no_easyWindows = 1
@@ -260,57 +219,16 @@
         map <C-H> <C-W>h<C-W>_
     endif
 
-    " End/Start of line motion keys act relative to row/wrap width in the
-    " presence of `:set wrap`, and relative to line for `:set nowrap`.
-    " Default vim behaviour is to act relative to text line in both cases
-    " If you prefer the default behaviour, add the following to your
-    " .vimrc.before.local file:
-    " [CHRIS][170302][DEL][START]
-    "" let g:spf13_no_wrapRelMotion = 1
-    "if !exists('g:spf13_no_wrapRelMotion')
-    "    " Same for 0, home, end, etc
-    "    function! WrapRelativeMotion(key, ...)
-    "        let vis_sel=""
-    "        if a:0
-    "            let vis_sel="gv"
-    "        endif
-    "        if &wrap
-    "            execute "normal!" vis_sel . "g" . a:key
-    "        else
-    "            execute "normal!" vis_sel . a:key
-    "        endif
-    "    endfunction
+    " The following two lines conflict with moving to top and
+    " bottom of the screen
+    " If you prefer that functionality, add the following
+    "   let g:spf13_no_fastTabs = 1
+    if !exists('g:spf13_no_fastTabs')
+        map <S-H> gT
+        map <S-L> gt
+    endif    
 
-    "    " Map g* keys in Normal, Operator-pending, and Visual+select
-    "    noremap $ :call WrapRelativeMotion("$")<CR>
-    "    noremap <End> :call WrapRelativeMotion("$")<CR>
-    "    noremap 0 :call WrapRelativeMotion("0")<CR>
-    "    noremap <Home> :call WrapRelativeMotion("0")<CR>
-    "    noremap ^ :call WrapRelativeMotion("^")<CR>
-    "    " Overwrite the operator pending $/<End> mappings from above
-    "    " to force inclusive motion with :execute normal!
-    "    onoremap $ v:call WrapRelativeMotion("$")<CR>
-    "    onoremap <End> v:call WrapRelativeMotion("$")<CR>
-    "    " Overwrite the Visual+select mode mappings from above
-    "    " to ensure the correct vis_sel flag is passed to function
-    "    vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
-    "    vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
-    "    vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
-    "    vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
-    "    vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
-    "endif
-    " 
-    "" The following two lines conflict with moving to top and
-    "" bottom of the screen
-    "" If you prefer that functionality, add the following to your
-    "" .vimrc.before.local file:
-    ""   let g:spf13_no_fastTabs = 1
-    "if !exists('g:spf13_no_fastTabs')
-    "    map <S-H> gT
-    "    map <S-L> gt
-    "endif
-    " 
-    "" Stupid shift key fixes
+    " Stupid shift key fixes
     "if !exists('g:spf13_no_keyfixes')
     "    if has("user_commands")
     "        command! -bang -nargs=* -complete=file E e<bang> <args>
@@ -326,15 +244,9 @@
 
     "    cmap Tabe tabe
     "endif
-    " [CHRIS][170302][DEL][END]
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
-    " [CHRIS][170310][ADD][START]
-    " Yank To System Clipboard, And Paste From Clipboard Dependent on vim-gnome
-    map <C-c> "+y
-    map <Leader>p "+gp
-    " [CHRIS][170310][ADD][END]
 
     " Code folding options [设置Code折叠等级]
     nmap <leader>f0 :set foldlevel=0<CR>
@@ -360,7 +272,7 @@
 
 
     " Find merge conflict markers
-    map <leader>fc /\v^[<\|=>]( .*\|$)<CR>
+    map <leader>fc /\v^[<\|=>]{7}( .*\|$ )<CR>
 
     " Shortcuts
     " Change Working Directory to that of the current file
@@ -441,19 +353,15 @@
 
 
 " Functions {
-
-    " Strip whitespace {
-"        function! StripTrailingWhitespace()
-"            " Preparation: save last search, and cursor position.
-"            let _s=@/
-"            let l = line(".")
-"            let c = col(".")
-"            " do the business:
-"            %s/\s\+$//e
-"            " clean up: restore previous search history, and cursor position
-"            let @/=_s
-"            call cursor(l, c)
-"        endfunction
-    " }
+    " Remove trailing whitespaces and ^M chars
+    " To disable the stripping of whitespace, add the following to your
+    " .vimrc.before.local file:
+    "   let g:spf13_keep_trailing_whitespace = 1
+    "autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
+    "" Setup bundles config {
+    "    if filereadable(expand("~/.vim/vim_setting/.vimrc.bundles.func"))
+    "        source ~/.vim/vim_setting/.vimrc.bundles.func
+    "    endif
+    "" }
 " }
 
