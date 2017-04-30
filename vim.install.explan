@@ -35,21 +35,6 @@
 
 2. Explain use bundles
     " General {
-        Xuyuanp/nerdtree-git-plugin:
-            let g:NERDTreeIndicatorMapCustom = {
-                \ "Modified"  : "✹",
-                \ "Staged"    : "✚",
-                \ "Untracked" : "✭",
-                \ "Renamed"   : "➜",
-                \ "Unmerged"  : "═",
-                \ "Deleted"   : "✖",
-                \ "Dirty"     : "✗",
-                \ "Clean"     : "✔︎",
-                \ 'Ignored'   : '☒',
-                \ "Unknown"   : "?"
-                \ }
-            Use this variable to change symbols.
-
         vim-airline/vim-airline:
             let g:airline_left_sep = '»'
             let g:airline_right_sep = '«'
@@ -78,8 +63,29 @@
               let g:airline_section_c = '%t'
             <
 
+        Xuyuanp/nerdtree-git-plugin:
+            let g:NERDTreeIndicatorMapCustom = {
+                \ "Modified"  : "✹",
+                \ "Staged"    : "✚",
+                \ "Untracked" : "✭",
+                \ "Renamed"   : "➜",
+                \ "Unmerged"  : "═",
+                \ "Deleted"   : "✖",
+                \ "Dirty"     : "✗",
+                \ "Clean"     : "✔︎",
+                \ 'Ignored'   : '☒',
+                \ "Unknown"   : "?"
+                \ }
+            Use this variable to change symbols.
+
         nathanaelkane/vim-indent-guides:
-            Indent Guides is a plugin for visually displaying indent levels in Vim.        
+            Indent Guides is a plugin for visually displaying indent levels in Vim.
+
+        easymotion/vim-easymotion:
+            EasyMotion provides a much simpler way to use some motions in vim.
+            The default leader has been changed to <Leader><Leader> to avoid conflicts with other plugins you may have installed. T           his can easily be changed back to pre-1.3 behavior by rebinding the leader in your vimrc:
+            map <Leader> <Plug>(easymotion-prefix)
+
     "}
 
 
@@ -91,6 +97,22 @@
 
         godlygeek/tabular:
             it's useful to line up text.
+
+        mhinz/vim-signify:
+            Indicate changed lines within a file using a VCS.        
+                `+`     This line was added.
+                `!`     This line was modified.
+                `_1`    The number of deleted lines below this sign. If the number is larger
+                `99`    than 9, the `_` will be omitted. For numbers larger than 99, `_>`
+                `_>`    will be shown instead.
+                `!1`    This line was modified and a number of lines below were deleted.
+                `!>`    It is a combination of `!` and `_`. If the number is larger than 9,
+                      `!>` will be shown instead.
+                `‾`     The first line was removed. It's a special case of the `_` sign.
+                See |g:signify_sign_add| on how to use different signs.
+
+        tpope/vim-fugitive:
+            Whenever you edit a file from a Git repository, a set of commands is defined that serve as a gateway to Git.
 
     " }
 

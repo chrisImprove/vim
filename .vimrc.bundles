@@ -119,7 +119,7 @@
             " 可以自定义匹配搜索 BEGIN->END
             Bundle 'matchit.zip'
             " 可以用来保存文件上次退出的状态
-            Bundle 'vim-scripts/sessionman.vim'
+            " Bundle 'vim-scripts/sessionman.vim'
             " 提供了一组对应默认移动的键绑定 搜索高亮
             Bundle 'easymotion/vim-easymotion'
             " 多光标Vim 
@@ -136,10 +136,10 @@
     " General Programming {
         if count(g:bundle_groups, 'programming')
             " 快速的为字符串包围/改变或去除引号/括号或者HTML标签
-            Bundle 'tpope/vim-surround'
-            Bundle 'tpope/vim-repeat'
+            " Bundle 'tpope/vim-surround'
+            " Bundle 'tpope/vim-repeat'
             " 格式化工具
-            Bundle 'godlygeek/tabular'
+            " Bundle 'godlygeek/tabular'
             " 注释操作
             " Bundle 'scrooloose/nerdcommenter'
             " Bundle 'tpope/vim-commentary'
@@ -150,6 +150,7 @@
             " Git 集成 
             " 在左边行显示与Git仓库不同
             Bundle 'mhinz/vim-signify'
+            " A Git wrapper so awesome, it should be illegal
             Bundle 'tpope/vim-fugitive'
             " 解决冲突Git
             "Bundle 'rhysd/conflict-marker.vim'
@@ -179,11 +180,6 @@
             Bundle 'Valloric/YouCompleteMe'
             Bundle 'SirVer/ultisnips'
             Bundle 'honza/vim-snippets'
-"        elseif count(g:bundle_groups, 'neocomplcache')
-"            Bundle 'Shougo/neocomplcache'
-"            Bundle 'Shougo/neosnippet'
-"            Bundle 'Shougo/neosnippet-snippets'
-"            Bundle 'honza/vim-snippets'
         elseif count(g:bundle_groups, 'neocomplete')
             Bundle 'Shougo/neocomplete.vim.git'
             Bundle 'Shougo/neosnippet'

@@ -69,6 +69,7 @@ pick_choice() {
             ;;
         3)
             generate_tags
+            #ctags -R --PHP-kinds=cfi
             ctags -R --fields=+aimS --languages=php \
             --exclude=.git
             ;;

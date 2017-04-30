@@ -103,6 +103,20 @@ General {
         <Leader>N            | Jump to latest "/" or "?" backward. See |N|.
         <Leader>s            | Find(Search) {char} forward and backward.                             | See |f| and |F|.
 
+        " <Leader>f{char} to move to {char}
+        map  <Leader>f <Plug>(easymotion-bd-f)
+        nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+        " s{char}{char} to move to {char}{char}
+        nmap s <Plug>(easymotion-overwin-f2)
+
+        " Move to line
+        map <Leader>L <Plug>(easymotion-bd-jk)
+        nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+        " Move to word
+        map  <Leader>w <Plug>(easymotion-bd-w)
+        nmap <Leader>w <Plug>(easymotion-overwin-w)
         
 	terryma/vim-multiple-cursors:
         <C-n>   : start/select
@@ -160,7 +174,7 @@ General {
                         Some short phrase , some other phrase
                 A much longer phrase here , and another long phrase
       
-    Bundle 'tpope/vim-commentary':
+    Bundle 'scrooloose/nerdcommenter':
         \cc 注释当前行和选中行  
         \cn 没有发现和\cc有区别  
         \c<空格> 如果被选区域有部分被注释，则对被选区域执行取消注释操作，其它情况执行反转注释操作  
@@ -181,28 +195,32 @@ General {
         gc                      Text object for a comment (operator pending mode only.)
         gcgc                    Uncomment the current and adjacent commented lines.
         gcu		
-	ctrlpvim/ctrlp.vim [file search <defaut key-map is ctrl+p>]
-        使用:CtrlP或:CtrlP [starting-directory]调用CtrlP进入查找文件模式
-        使用:CtrlPBuffer或:CtrlPMRU进入查找buffer或者查找MRU文件模式
-        使用:CtrlPMixed同时搜索普通文件、Buffers或者MRU文件    
-        一旦CtrlP被打开了，就可以使用以下的命令
-        <F5> 清除当前目录下的缓存，获取新的结构
-        <c-f>和<c-b> 在各个模式下转换
-        <c-d> 使用文件名搜索代替全路径搜索
-        <c-r> 使用正则模式
-        <c-j>和<c-k> 上下选择文件
-        <c-t> <c-v>和<c-x> 在新的tab或者新的分割窗口打开选择的文件
-        <c-n>和<c-p> 找到之前或者之后查找的字符串
-        <c-y> 创建一个新的文件
-        <c-z> 标记或者取消标记多个文件然后使用<c-o>打开它们
 
+    ctrlpvim/ctrlp.vim [file search <defaut key-map is ctrl+p>]
+        Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
+        Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
+        Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
+        Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
 
-		ctrl + j/k 进行上下选择
-		ctrl + x 在当前窗口水平分屏打开文件
-		ctrl + v 同上, 垂直分屏
-		ctrl + t 在tab中打开
-		<leader>-f模糊搜索最近打开的文件(MRU)
-		<leader>-p模糊搜索当前目录及其子目录下的所有文件
+        Once CtrlP is open:
+
+        Press <F5> to purge the cache for the current directory to get new files,
+            remove deleted files and apply new ignore options.
+        Press <c-f> and <c-b> to cycle between modes.
+        Press <c-d> to switch to filename only search instead of full path.
+        Press <c-r> to switch to regexp mode.
+        Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+        Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+        Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+        Use <c-y> to create a new file and its parent directories.
+        Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+
+        ctrl + j/k 进行上下选择
+        ctrl + x 在当前窗口水平分屏打开文件
+        ctrl + v 同上, 垂直分屏
+        ctrl + t 在tab中打开
+        <leader>-f模糊搜索最近打开的文件(MRU)
+        <leader>-p模糊搜索当前目录及其子目录下的所有文件
 
 	tacahiroy/ctrlp-funky.vim
 		<leader>fu 进入当前文件的函数列表搜索
@@ -253,28 +271,17 @@ General {
             *:YcmCompleter* :
                 This command gives access to a number of additional IDE-like features in YCM,
                 for things like semantic GoTo, type information, FixIt and refactoring.
-                          
 
-
-
-
-
-
-
-
-
-
-
-        nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-        nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>  "force recomile with
-        GoTo Commands ~
-            These commands are useful for jumping around and exploring code. When moving
-            the cursor, the subcommands add entries to Vim's 'jumplist' so you can use
-            'CTRL-O' to jump back to where you where before invoking the command (and
-            'CTRL-I' to jump forward; see ':h jumplist' for details). If there is more than
-            one destination, the quickfix list (see ':h quickfix') is populated with the
-            available locations and opened to full width at the bottom of the screen. You
-            can change this behavior by using the |YcmQuickFixOpened| autocommand.
+            nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+            nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>  "force recomile with
+            GoTo Commands ~
+                These commands are useful for jumping around and exploring code. When moving
+                the cursor, the subcommands add entries to Vim's 'jumplist' so you can use
+                'CTRL-O' to jump back to where you where before invoking the command (and
+                'CTRL-I' to jump forward; see ':h jumplist' for details). If there is more than
+                one destination, the quickfix list (see ':h quickfix') is populated with the
+                available locations and opened to full width at the bottom of the screen. You
+                can change this behavior by using the |YcmQuickFixOpened| autocommand.
 " }
 
 
