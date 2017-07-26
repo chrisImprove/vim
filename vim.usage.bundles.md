@@ -459,6 +459,16 @@ HTML "{
           ---------------------
 " }
 
+PHP "{
+	PIV:
+		 hit K (shift+k) on any function to see full documentation file for that function even offline.
+		 #### Non-static completion
+			$instance = new SomeClass; 
+			... 
+			$instance-><C-X><C-O> to display the omnicompletion menu (see :help ins-completion) 
+			$instance->completeMe(); // will autoselect completeMe since it's the only public non-static method 
+" }
+
 
 
 

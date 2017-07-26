@@ -110,7 +110,7 @@
         if count(g:bundle_groups, 'general')
             " 树状目录
             Bundle 'scrooloose/nerdtree'
-            Bundle 'jistr/vim-nerdtree-tabs'
+            "Bundle 'jistr/vim-nerdtree-tabs'
             Bundle 'Xuyuanp/nerdtree-git-plugin'
             " 缩进显示
             Bundle 'nathanaelkane/vim-indent-guides'
