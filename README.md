@@ -13,6 +13,7 @@ Description : This is my Vim Configuration
         vimUsage.md :   Tells how to use plugin(like ctags, ag, nerdtree...)
 
 
+
     Steps :
         1.  Install The Tagbar
             sudo apt install exuberant-ctags
@@ -22,3 +23,10 @@ Description : This is my Vim Configuration
        
         3.  Compile YouCompleteMe
             sh ~/.vim/vim_setting/script && sh YouCompleteMe.sh
+
+
+
+    Issue :
+        1.  vim-airline 这个版本比较美观
+            commit 13bd4701ed8ef57150f2d4f56122cd11ecf39345
+
