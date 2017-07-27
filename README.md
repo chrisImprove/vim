@@ -11,4 +11,14 @@ Description : This is my Vim Configuration
         .vimrc.bundles.conf : All Plugin configuration.
         vim.explain.md : Detailed explanation of installation method.
         vimUsage.md :   Tells how to use plugin(like ctags, ag, nerdtree...)
+
+
+    Steps :
+        1.  Install The Tagbar
+            sudo apt install exuberant-ctags
+
+        2.  Font Install
+            cd  ~/.vim/bundle/fonts/ && sh install
        
+        3.  Compile YouCompleteMe
+            sh ~/.vim/vim_setting/script && sh YouCompleteMe.sh
