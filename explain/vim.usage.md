@@ -1,15 +1,10 @@
-" Modeline and Notes {
-" THIS FILE IS THE INSTRUCTION OF INSTALLING VIM BUNDLES
-" Divided into 2 parts: 1.Install process  2.explain use method
-" Author    : CHRIS
-" Date      : 20170428
-" }
+# VIM 自带快捷键的使用方法
 
-" motion {
+### motion
     %
-        Find the next item in this line after or under the cursor and jump to its match
+        Find the next item in this line after or under the cursor and jump to its match  <br>
     [[
-        sections forward or to the next '{' in the first column.
+        sections forward or to the next '{' in the first column.  <br>
         When used after an operator, then also stops below a '}' in the first column.
     gD
         Goto global Declaration.  When the cursor is on a global variable that is defined in the file,
@@ -22,10 +17,9 @@
         jump to the bookmark x
     [count]> / [count]<
         Increased / less indented
-" }
 
 
-" tab {
+### tab
 	:tabnew [++opt选项] ［＋cmd］ 文件      建立对指定文件新的tab
 	:tabc   
 	:tabo
@@ -38,10 +32,9 @@
         next tab
 	gT/gt
         go the previous/next tab
-" }
 
 
-" buffer {
+### buffer
     :ls
         list all buffers
         1 #  "shell1.sh"  /  2 %a "shell2.sh"   /3    "shell.sh" 
@@ -59,10 +52,9 @@
     Ctrl + ^ : 
          % visible in the current window, # the rotation file.
         switch in % and # buffer.
-" }
 
 
-" .vimrc {
+### .vimrc中快捷键  
     Normal Model: 
         [count]J :
             Join [count] lines, with a minimum of two lines. Remove the indent and insert up to two spacesbelow)
@@ -93,4 +85,3 @@
 
     set cursorline/cursorcolumn:
         highlight current line/column
-" }

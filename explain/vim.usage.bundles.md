@@ -1,22 +1,18 @@
-*************************************************************
-*	Descirption	:	本文件解释Vim插件的使用方法				*
-*	Author		:	CHRIS									*
-*	Date		:	20160805								*
-*************************************************************
-" UI {
-    vim-airline/vim-airline:
-        :AirlineTheme {theme-name}
-            Displays or changes the current theme.
-        :AirlineToggleWhitespace
-            Toggles whitespace detection.
-        :AirlineToggle
-            Toggles between the standard 'statusline' and airline.
-        :AirlineRefresh
-            Refreshes all highlight groups and redraws the statusline.
-" }
+# 本文件解释Vim插件的使用方法
+
+### UI
+	vim-airline/vim-airline:
+		:AirlineTheme {theme-name}
+	Displays or changes the current theme.
+		:AirlineToggleWhitespace
+	Toggles whitespace detection.
+		:AirlineToggle
+	Toggles between the standard 'statusline' and airline.
+		:AirlineRefresh
+	Refreshes all highlight groups and redraws the statusline.
 
 
-General {
+### General
 	nerdtree:
         o   :Open files, directories and bookmarks
         go  :Open selected file, but leave cursor in the NERDTree
@@ -125,11 +121,8 @@ General {
         Insert mode such as `c` or `s` from Visual mode or `i`, `a`, `I`, `A` in Normal mode
             should work without any issues. 
 
-" }
 
-
-
-" General Programming {
+### General Programming
 	tpope/vim-surround : 
 		Usage:
 			Old text                  Command     New text ~
@@ -240,10 +233,9 @@ General {
 		" Mnemonic _i_nteractive
 		nnoremap <silent> <leader>gi :Git add -p %<CR>
 		nnoremap <silent> <leader>gg :SignifyToggle<CR>
-}
+        
 
-
-" Snippets & AutoComplete {
+### Snippets & AutoComplete
     YouCompleteMe :
         Valloric/YouCompleteMe:
             *:YcmRestartServer* :
@@ -282,10 +274,9 @@ General {
                 one destination, the quickfix list (see ':h quickfix') is populated with the
                 available locations and opened to full width at the bottom of the screen. You
                 can change this behavior by using the |YcmQuickFixOpened| autocommand.
-" }
 
 
-HTML "{
+### HTML
     mattn/emmet-vim:
         *** Very Good plugin ***
         Chinese Doc : http://www.zfanw.com/blog/zencoding-vim-tutorial-chinese.html
@@ -457,17 +448,15 @@ HTML "{
           \  },
           \}
           ---------------------
-" }
 
-PHP "{
-	PIV:
-		 hit K (shift+k) on any function to see full documentation file for that function even offline.
-		 #### Non-static completion
-			$instance = new SomeClass; 
-			... 
-			$instance-><C-X><C-O> to display the omnicompletion menu (see :help ins-completion) 
-			$instance->completeMe(); // will autoselect completeMe since it's the only public non-static method 
-" }
+### PHP 
+    PIV:
+         hit K (shift+k) on any function to see full documentation file for that function even offline.
+         #### Non-static completion
+            $instance = new SomeClass; 
+            ... 
+            $instance-><C-X><C-O> to display the omnicompletion menu (see :help ins-completion) 
+            $instance->completeMe(); // will autoselect completeMe since it's the only public non-static method 
 
 
 

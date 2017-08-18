@@ -1,39 +1,34 @@
-" Modeline and Notes {
-" THIS FILE IS THE INSTRUCTION OF INSTALLING VIM BUNDLES
-" Divided into 2 parts: 1.Install process  2.explain use method
-" Author    : CHRIS
-" Date      : 20170428
-" }
+# VIM配置的安装流程
 
-1. Install Process
-    powerline/fonts :
-        " fonst used for powerline/airline.
-        cd ~/.vim/bundle/fonts/
-        ./install
+### 1. 安装流程
 
-    Valloric/YouCompleteMe :
-            " Vim 7.4.143  Python 2/3support.
-            cd ~/.vim/vim_setting/script
-            sh YouCompleteMe.sh
-            Because this plugin in need install
-                modidy the configuration file [ already copy to vim_setting]
-                Maybe need add some headfiles to the configuration file if you want.
++ 字体安装  
+powerline/fonts :  
+    " fonst used for powerline/airline..  
+    cd ~/.vim/bundle/fonts/  
+    ./install  
+    
++ YouComplete编译安装  
+Valloric/YouCompleteMe :  
+    " Vim 7.4.143  Python 2/3support.  
+    cd ~/.vim/vim_setting/script  
+    sh YouCompleteMe.sh  
+    Because this plugin in need install  
+        modidy the configuration file [ already copy to vim_setting]  
+        Maybe need add some headfiles to the configuration file if you want.  
+    neocomplete : require vim-lua  
 
-    neocomplete : require vim-lua
-
-    " Deps On Command{
-        ag.vim
-            sudo apt-get install silversearcher-ag
-
-        tagbar.vim
-            sudo apt-get install ctags
-
-        cscope:
-            sudo apt-get install cscope
-    " }
++ 常用工具  
+ag.vim  
+    sudo apt-get install silversearcher-ag  
+tagbar.vim  
+    sudo apt-get install ctags  
+cscope:  
+    sudo apt-get install cscope  
 
 
-2. Explain use bundles
+### 2. 常见插件配置
+
     " General {
         vim-airline/vim-airline:
             let g:airline_left_sep = '»'
@@ -90,7 +85,7 @@
 
 
     " General Programming {
-	    tpope/vim-surround : 
+        tpope/vim-surround : 
             Surround.vim is all about "surroundings": parentheses, brackets, quotes,
             XML tags, and more.  The plugin provides mappings to easily delete,
             change and add such surroundings in pairs.
