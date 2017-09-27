@@ -79,7 +79,7 @@
     " 'writing', 'python', 'javascript', 'C', 'youcompleteme', 'neocomplcache' ,'programming', 'neocomplete', 'php', 'html'
     " youcompleteme->Pythone neocomplete->Lua neocomplcache->no need any sport
     if !exists('g:bundle_groups')
-        let g:bundle_groups=['UI', 'general', 'programming', 'youcompleteme', 'php', 'html', 'javascript']
+        let g:bundle_groups=['UI', 'general', 'programming', 'youcompleteme', 'php', 'html', 'javascript', 'writing']
     endif
 
     if !exists("g:override_bundles")
@@ -249,10 +249,11 @@
 
     " Writing {
         if count(g:bundle_groups, 'writing')
-            Bundle 'reedes/vim-litecorrect'
-            Bundle 'reedes/vim-textobj-sentence'
-            Bundle 'reedes/vim-textobj-quote'
-            Bundle 'reedes/vim-wordy'
+            "Bundle 'reedes/vim-litecorrect'
+            "Bundle 'reedes/vim-textobj-sentence'
+            "Bundle 'reedes/vim-textobj-quote'
+            "Bundle 'reedes/vim-wordy'
+            Bundle 'suan/vim-instant-markdown'
         endif
     " }
 
