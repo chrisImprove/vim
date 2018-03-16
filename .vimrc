@@ -8,7 +8,7 @@
 " Environment {
     " Identify platform {
         silent function! OSX()
-            return has('macunix')
+            return has('unix')
         endfunction
         silent function! LINUX()
             return has('unix') && !has('macunix') && !has('win32unix')
@@ -129,7 +129,7 @@
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
-    set cursorcolumn                " Highlight current colorcolumn
+    "set cursorcolumn                " Highlight current colorcolumn
     set cursorline                  " Highlight current line
 
     highlight clear SignColumn      " SignColumn should match background
@@ -247,6 +247,8 @@
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
+    vmap <C-x> :!pbcopy<CR>
+    vmap <C-c> :w !pbcopy<CR><CR>
 
     " Code folding options [设置Code折叠等级]
     nmap <leader>f0 :set foldlevel=0<CR>
