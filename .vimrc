@@ -154,6 +154,8 @@
     "set foldenable                  " Auto fold code
     set list                        " Show tab and space
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+	set ffs=unix,dos				" 解决行尾带^M
+	set ff=unix
 
     if has('cmdline_info')
         set ruler                   " Show the ruler

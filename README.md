@@ -4,9 +4,11 @@
 ### **1. 安装方法:**
 > curl https://raw.githubusercontent.com/chrisImprove/vim/master/bootstrap.sh > bootstrap.sh && sh bootstrap.sh
 
-> sh ~/.vim/vim_setting/script && sh YouCompleteMe.sh
+> cd ~/.vim/vim_setting/script && sh YouCompleteMe.sh
 
-> sudo apt install exuberant-ctags
+> brew install exuberant-ctags
+
+> brew install php-cs-fixer
 
 > cd  ~/.vim/bundle/fonts/ && sh install
 

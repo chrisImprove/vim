@@ -198,6 +198,10 @@
             Bundle 'beyondwords/vim-twig'
             " YII2 apidoc API帮助文档
             Bundle 'mikehaertl/yii2-apidoc-vim'
+            " Coding Style Guide PSR-2 格式化标准
+            if executable('php-cs-fixer')
+                Bundle 'stephpy/vim-php-cs-fixer'
+            endif
         endif
     " }
 
