@@ -25,6 +25,8 @@ tagbar.vim
     sudo apt-get install ctags  
 cscope:  
     sudo apt-get install cscope  
+php-cs-fix  
+    brew install php-cs-fixer  
 
 
 ### 2. 常见插件配置
