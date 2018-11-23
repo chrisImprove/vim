@@ -2,15 +2,26 @@
 ======
 
 ### **1. 安装方法:**
-> curl https://raw.githubusercontent.com/chrisImprove/vim/master/bootstrap.sh > bootstrap.sh && sh bootstrap.sh
+```
+curl https://raw.githubusercontent.com/chrisImprove/vim/master/bootstrap.sh > bootstrap.sh && sh bootstrap.sh
 
-> cd ~/.vim/vim_setting/script && sh YouCompleteMe.sh
+cd ~/.vim/vim_setting/script && sh YouCompleteMe.sh
 
-> brew install exuberant-ctags
+cd  ~/.vim/bundle/fonts/ && sh install
 
-> brew install php-cs-fixer
+brew install the_silver_searcher
 
-> cd  ~/.vim/bundle/fonts/ && sh install
+brew install exuberant-ctags
+
+brew install php-cs-fixer
+
+sudo npm -g install instant-markdown-d
+
+brew install cscope
+```
+> php-cs-fixer : *PHP代码格式化*
+
+> instant-markdown-d : *Markdown自动启动浏览器*
 
 ### **2. 文件说明:**
 > bootstrap.sh :  引导文件

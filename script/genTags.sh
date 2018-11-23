@@ -4,6 +4,7 @@ echo "******    This file is used for generate tags ******"
 echo "* 1. generate C tags"
 echo "* 2. generate C++ tags"
 echo "* 3. generate php tags"
+echo "* 4. generate php cscope tags"
 echo "****************************************************"
 
 program_exists() {
@@ -56,7 +57,7 @@ generate_tags() {
 }
 
 pick_choice() {
-    read -p "Please type you choice(1/2/3/q) : " choice
+    read -p "Please type you choice(1/2/3/4/q) : " choice
 
     case $choice in
         1)
@@ -72,6 +73,19 @@ pick_choice() {
             #ctags -R --PHP-kinds=cfi
             ctags -R --fields=+aimS --languages=php \
             --exclude=.git
+            ;;
+        4)
+            read -p "Please type which folder : " folder
+            if [ -d $folder ]; then
+                cd $folder
+                ret="$?"
+                success "cd $folder now..."
+            else
+                error "$folder is not a dir"
+            fi
+
+            find $(pwd) -name "*.php" > cscope.files
+            cscope -b
             ;;
         *)
             error "Sorry...  you pick exit generate tags..."
