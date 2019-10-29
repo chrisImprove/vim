@@ -70,6 +70,7 @@
     set mouse=                  " Automatically enable mouse usage
     "set mousehide              " Hide the mouse cursor while typing
 
+    set fileformat=unix
     set encoding=utf-8          " 设置编码格式为UTF8
     set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
     set termencoding=utf-8
