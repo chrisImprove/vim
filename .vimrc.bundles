@@ -79,7 +79,7 @@
     " 'writing', 'python', 'javascript', 'C', 'youcompleteme', 'neocomplcache' ,'programming', 'neocomplete', 'php', 'html'
     " youcompleteme->Pythone neocomplete->Lua neocomplcache->no need any sport
     if !exists('g:bundle_groups')
-        let g:bundle_groups=['UI', 'general', 'programming', 'youcompleteme', 'php', 'html', 'javascript', 'writing']
+        let g:bundle_groups=['UI', 'general', 'programming', 'youcompleteme', 'php', 'html', 'javascript', 'writing', 'Java']
     endif
 
     if !exists("g:override_bundles")
@@ -139,7 +139,7 @@
             " Bundle 'tpope/vim-surround'
             " Bundle 'tpope/vim-repeat'
             " 格式化工具
-            " Bundle 'godlygeek/tabular'
+            Bundle 'godlygeek/tabular'
             " 注释操作
             " Bundle 'scrooloose/nerdcommenter'
             " Bundle 'tpope/vim-commentary'
@@ -261,6 +261,12 @@
             "Bundle 'reedes/vim-textobj-quote'
             "Bundle 'reedes/vim-wordy'
             Bundle 'suan/vim-instant-markdown'
+        endif
+    " }
+
+    " Java {
+        if count(g:bundle_groups, 'Java')
+            Bundle 'artur-shaik/vim-javacomplete2'
         endif
     " }
 
